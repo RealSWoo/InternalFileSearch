@@ -135,13 +135,13 @@ npm run dev
 
 ## 저작권 및 사용권 정보
 
-Copyright © 2026 swoo226. All Rights Reserved.
+Copyright © 2026 RealSWoo. All Rights Reserved.
 
 이 프로젝트는 독점 소프트웨어입니다. 저작권자의 사전 서면 허가 없이 소스 코드와 문서를 복제, 수정, 배포, 재라이선스하거나 상업적으로 사용할 수 없습니다. 자세한 내용은 저장소의 `LICENSE` 파일을 확인하세요.
 
 ## 프로그래머 정보
 
-- 개발자: swoo226
+- 개발자: RealSWoo
 - 문의: [swoo226@oton.kr](mailto:swoo226@oton.kr)
 
 ## 버그 및 디버그
@@ -179,7 +179,6 @@ Copyright © 2026 swoo226. All Rights Reserved.
 - [Vite 공식 문서](https://vite.dev/guide/)
 - [Node.js 공식 사이트](https://nodejs.org/)
 
-프로젝트 요구사항과 세부 동작은 저장소의 `사내 파일검색 챗봇 개발기획서.md`, `사내 파일검색 챗봇 상세 기능 명세서.md`도 참고하세요.
 
 ## 버전 및 업데이트 정보
 
