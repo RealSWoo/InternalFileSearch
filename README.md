@@ -8,7 +8,7 @@
 ## 프로젝트 구성
 
 ```text
-chatbot/
+InternalFileSearch/
 ├─ backend/
 │  ├─ app/
 │  │  ├─ api/          # 검색, 색인, 상태 확인 API
@@ -51,23 +51,180 @@ Node.js 설치 시 npm이 함께 설치됩니다. 별도의 SQLite 서버, TypeS
 
 ### 2. 백엔드 설치
 
-프로젝트 루트에서 PowerShell을 열고 실행합니다.
+백엔드는 Python으로 실행됩니다. 프로젝트마다 사용하는 Python 패키지와 버전이 서로 충돌하지 않도록 **가상환경(venv)** 을 만든 뒤, 해당 가상환경 안에 필요한 패키지를 설치합니다.
+
+먼저 다운로드하거나 복제한 프로젝트의 최상위 폴더인 `InternalFileSearch` 폴더에서 PowerShell을 엽니다.
+
+현재 위치가 프로젝트 루트인지 확인합니다.
+
+```powershell
+pwd
+```
+
+폴더 안에 다음과 같이 `backend`, `frontend`, `requirements.txt` 등이 보이면 올바른 위치입니다.
+
+```text
+InternalFileSearch/
+├─ backend/
+├─ frontend/
+├─ requirements.txt
+└─ README.md
+```
+
+#### 2-1. Python 설치 확인
+
+다음 명령어를 실행합니다.
+
+```powershell
+python --version
+```
+
+예시:
+
+```text
+Python 3.12.x
+```
+
+이 프로젝트는 **Python 3.12 사용을 권장합니다.**
+
+`python` 명령을 찾을 수 없다는 메시지가 나오면 Python을 먼저 설치한 뒤 PowerShell 또는 VS Code를 다시 실행합니다.
+
+#### 2-2. Python 가상환경 생성
+
+프로젝트 루트에서 다음 명령어를 실행합니다.
 
 ```powershell
 python -m venv venv
+```
+
+이 명령은 프로젝트 루트에 `venv`라는 폴더를 생성합니다.
+
+```text
+InternalFileSearch/
+├─ backend/
+├─ frontend/
+├─ venv/              # Python 가상환경
+├─ requirements.txt
+└─ README.md
+```
+
+가상환경은 이 프로젝트에서 사용하는 Python 패키지를 별도로 관리하기 위한 공간입니다.
+
+예를 들어 다른 Python 프로젝트에서 FastAPI나 SQLAlchemy의 다른 버전을 사용하고 있더라도, 이 프로젝트의 `venv` 내부 패키지와 서로 영향을 주지 않습니다.
+
+`venv` 폴더는 자동으로 생성되는 실행 환경이므로 GitHub에 업로드하지 않습니다.
+
+> 이 프로젝트에서는 가상환경을 별도로 활성화하지 않고 `.\venv\Scripts\python.exe`를 직접 호출하는 방식을 사용합니다.  
+> 따라서 PowerShell의 실행 정책 때문에 `Activate.ps1`이 차단되는 문제를 피할 수 있습니다.
+
+#### 2-3. pip 업데이트
+
+생성한 가상환경의 Python을 사용하여 pip를 최신 버전으로 업데이트합니다.
+
+```powershell
 .\venv\Scripts\python.exe -m pip install --upgrade pip
+```
+
+여기서 `pip`는 Python 패키지를 설치하고 관리하는 도구입니다.
+
+#### 2-4. 백엔드 패키지 설치
+
+프로젝트의 `requirements.txt`에는 백엔드 실행에 필요한 Python 패키지 목록이 기록되어 있습니다.
+
+다음 명령어를 실행합니다.
+
+```powershell
 .\venv\Scripts\python.exe -m pip install -r requirements.txt
 ```
 
+FastAPI, SQLAlchemy 등 프로젝트에 필요한 패키지가 `venv` 내부에 설치됩니다.
+
+설치가 정상적으로 완료되었는지 확인하려면 다음 명령어를 실행할 수 있습니다.
+
+```powershell
+.\venv\Scripts\python.exe -m pip list
+```
+
+패키지 목록이 출력되면 백엔드 설치가 완료된 것입니다.
+
 ### 3. 프런트엔드 설치
+
+프런트엔드는 React, TypeScript, Vite를 사용하며 Node.js와 npm으로 패키지를 관리합니다.
+
+#### 3-1. Node.js와 npm 설치 확인
+
+프로젝트 루트에서 다음 명령어를 실행합니다.
+
+```powershell
+node -v
+npm -v
+```
+
+예시:
+
+```text
+v24.x.x
+11.x.x
+```
+
+이 프로젝트는 **Node.js 24 LTS 사용을 권장합니다.**
+
+Vite 8을 사용하기 위해서는 최소 Node.js 20.19 이상 또는 22.12 이상이 필요합니다.
+
+`node` 또는 `npm` 명령을 찾을 수 없다는 메시지가 나오면 Node.js를 먼저 설치한 뒤 PowerShell 또는 VS Code를 다시 실행합니다.
+
+Node.js를 설치하면 npm도 함께 설치되므로 npm을 별도로 설치할 필요는 없습니다.
+
+#### 3-2. frontend 폴더로 이동
+
+프런트엔드 관련 파일은 `frontend` 폴더 안에 있으므로 다음 명령어로 이동합니다.
 
 ```powershell
 cd frontend
+```
+
+현재 위치는 다음과 같은 형태가 됩니다.
+
+```text
+InternalFileSearch\frontend
+```
+
+#### 3-3. 프런트엔드 패키지 설치
+
+다음 명령어를 실행합니다.
+
+```powershell
 npm ci
+```
+
+`npm ci`는 `frontend/package-lock.json`에 기록되어 있는 정확한 버전을 기준으로 필요한 패키지를 설치합니다.
+
+설치가 완료되면 `frontend` 폴더 안에 `node_modules` 폴더가 자동으로 생성됩니다.
+
+```text
+frontend/
+├─ node_modules/       # 설치된 Node.js 패키지
+├─ public/
+├─ src/
+├─ package.json
+└─ package-lock.json
+```
+
+`node_modules`는 필요한 경우 다시 생성할 수 있으므로 GitHub에 업로드하지 않습니다.
+
+> 일반적인 개발에서는 `npm install`도 사용할 수 있지만, 이 프로젝트를 처음 설치하거나 동일한 개발 환경을 재현할 때는 `package-lock.json`에 기록된 버전을 그대로 설치하는 `npm ci` 사용을 권장합니다.
+
+#### 3-4. 프로젝트 루트로 돌아가기
+
+프런트엔드 패키지 설치가 끝나면 다음 명령어를 실행합니다.
+
+```powershell
 cd ..
 ```
 
-`npm ci`는 `package-lock.json`에 기록된 버전으로 패키지를 설치합니다.
+다시 프로젝트 루트인 `InternalFileSearch` 폴더로 이동합니다.
+
+여기까지 완료하면 백엔드와 프런트엔드 실행에 필요한 기본 패키지 설치가 완료됩니다.
 
 ### 4. 환경설정
 
@@ -135,13 +292,13 @@ npm run dev
 
 ## 저작권 및 사용권 정보
 
-Copyright © 2026 RealSWoo. All Rights Reserved.
+Copyright © 2026 RealSWoo(swoo226@oton.kr). All Rights Reserved.
 
 이 프로젝트는 독점 소프트웨어입니다. 저작권자의 사전 서면 허가 없이 소스 코드와 문서를 복제, 수정, 배포, 재라이선스하거나 상업적으로 사용할 수 없습니다. 자세한 내용은 저장소의 `LICENSE` 파일을 확인하세요.
 
 ## 프로그래머 정보
 
-- 개발자: RealSWoo
+- 개발자: RealSWoo(swoo226@oton.kr)
 - 문의: [swoo226@oton.kr](mailto:swoo226@oton.kr)
 
 ## 버그 및 디버그
