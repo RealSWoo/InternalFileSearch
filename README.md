@@ -122,7 +122,7 @@ InternalFileSearch/
 생성한 가상환경의 Python을 사용하여 pip를 최신 버전으로 업데이트합니다.
 
 ```powershell
-.\venv\Scripts\python.exe -m pip install --upgrade pip
+python -m pip install --upgrade pip
 ```
 
 여기서 `pip`는 Python 패키지를 설치하고 관리하는 도구입니다.
@@ -134,7 +134,7 @@ InternalFileSearch/
 다음 명령어를 실행합니다.
 
 ```powershell
-.\venv\Scripts\python.exe -m pip install -r requirements.txt
+python -m pip install -r requirements.txt
 ```
 
 FastAPI, SQLAlchemy 등 프로젝트에 필요한 패키지가 `venv` 내부에 설치됩니다.
@@ -142,7 +142,7 @@ FastAPI, SQLAlchemy 등 프로젝트에 필요한 패키지가 `venv` 내부에 
 설치가 정상적으로 완료되었는지 확인하려면 다음 명령어를 실행할 수 있습니다.
 
 ```powershell
-.\venv\Scripts\python.exe -m pip list
+python -m pip list
 ```
 
 패키지 목록이 출력되면 백엔드 설치가 완료된 것입니다.
@@ -276,6 +276,8 @@ npm run dev
 ```
 
 브라우저에서 <http://localhost:5173>에 접속합니다.
+만약 5173을 이미 사용중이라면 5174 등 번호를 지정하거나 frontend 터미널을
+확인해서 확인하시길 바랍니다.
 
 ### 3. 문서 색인과 검색
 
@@ -287,14 +289,12 @@ npm run dev
 명령줄에서 색인하려면 백엔드 폴더에서 다음 명령을 실행할 수 있습니다.
 
 ```powershell
-..\venv\Scripts\python.exe run_index.py
+python run_index.py
 ```
 
 ## 저작권 및 사용권 정보
 
-Copyright © 2026 RealSWoo(swoo226@oton.kr). All Rights Reserved.
-
-이 프로젝트는 독점 소프트웨어입니다. 저작권자의 사전 서면 허가 없이 소스 코드와 문서를 복제, 수정, 배포, 재라이선스하거나 상업적으로 사용할 수 없습니다. 자세한 내용은 저장소의 `LICENSE` 파일을 확인하세요.
+자세한 내용은 저장소의 `LICENSE` 파일을 확인하세요.
 
 ## 프로그래머 정보
 
@@ -323,7 +323,7 @@ Copyright © 2026 RealSWoo(swoo226@oton.kr). All Rights Reserved.
 백엔드 로그를 자세히 보려면 `--log-level debug` 옵션을 추가할 수 있습니다.
 
 ```powershell
-..\venv\Scripts\python.exe -m uvicorn app.main:app --reload --log-level debug
+python -m uvicorn app.main:app --reload --log-level debug
 ```
 
 ## 참고 및 출처
